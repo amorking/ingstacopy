@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <div class="home-content"></div>
+    <div class="home-content">
+      <AppBar></AppBar>
+      <CoreView></CoreView>
+    </div>
   </div>
 </template>
 
@@ -9,7 +12,10 @@
 
 export default {
   name: 'Home',
-  components: {},
+  components: {
+    AppBar: () => import('@/components/core/AppBar.vue'),
+    CoreView: () => import('@/components/core/CoreView.vue'),
+  },
 };
 </script>
 
