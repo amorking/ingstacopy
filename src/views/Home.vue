@@ -3,6 +3,7 @@
     <div class="home-content">
       <AppBar></AppBar>
       <CoreView></CoreView>
+      <ToolBar></ToolBar>
     </div>
   </div>
 </template>
@@ -15,6 +16,7 @@ export default {
   components: {
     AppBar: () => import('@/components/core/AppBar.vue'),
     CoreView: () => import('@/components/core/CoreView.vue'),
+    ToolBar: () => import('@/components/core/ToolBar.vue'),
   },
 };
 </script>
@@ -27,8 +29,10 @@ export default {
   justify-content: center;
 }
 .home-content {
+  position: relative;
   background: #fff;
-  min-width: 560px;
+  width: 100%;
+  max-width: 560px;
   min-height: 100vh;
 }
 </style>
