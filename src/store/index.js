@@ -97,7 +97,8 @@ export default new Vuex.Store({
   },
   mutations: {
     setHash(state, payload) {
-      state.post.content.text = payload;
+      //post는 배열이니까 return 받은 오브젝트를 원소로 push
+      state.post.push = payload;
     },
   },
   actions: {},
