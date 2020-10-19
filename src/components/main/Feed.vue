@@ -1,6 +1,11 @@
 <template>
   <div class="feed">
-    <div class="feed-wrap mb-4" v-for="(postItem, i) in post" :key="i">
+    <div
+      class="feed-wrap mb-4"
+      v-for="(postItem, i) in post"
+      :key="i"
+      :v-model="postItem"
+    >
       <div class="feed-user-info d-flex align-center pa-4">
         <v-avatar class="profile mr-4">
           <img :src="postItem.userProfile.img" alt="프로필 이미지" />
@@ -53,6 +58,15 @@
               <span class="user-name mr-1">
                 {{ postItem.userProfile.name }}
               </span>
+              {{ postItem.content.text }}
+              <a
+                class="link"
+                href="#"
+                v-for="(hashItem, i) in postItem.content.hash"
+                :key="i"
+              >
+                {{ `#${hashItem}` }}
+              </a>
             </p>
           </div>
           <div class="comment-wrap">
@@ -85,6 +99,19 @@ export default {
     return {};
   },
   methods: {},
+  beforeMount() {
+    this.$store.commit(
+      'setHash',
+      this.post.forEach((el) => {
+        //내용을 쭉--쓰고 맨 뒤에 hashTag를 #으로 구분해서 붙였다는 가정
+        let hashArr = el.content.text.split('#'); //post 배열의 각 오브젝트에서 content.text를 #으로 split
+        let parsedHash = hashArr.splice(1, hashArr.length); //#으로 split된 배열의 1번째 자리부터 hashArr.length만큼 지우고, splice는 지운 값을 리턴한다.
+        el.content.hash = parsedHash; //content에 hash라는 키를 추가하고 hash의 값을 parseHash로 초기화
+        el.content.text = hashArr[0]; //content에 text를 hashArr에서 hashTag를 제외한 0번째 원소, 즉 내용으로 초기화.
+        return el; //parsing한 내용을 추가한 el을 리턴
+      })
+    );
+  },
 };
 </script>
 
