@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <StorySlider></StorySlider>
+    <Feed></Feed>
   </div>
 </template>
 
@@ -9,6 +10,7 @@ export default {
   name: 'Main',
   components: {
     StorySlider: () => import('@/components/main/StorySlider.vue'),
+    Feed: () => import('@/components/main/Feed.vue'),
   },
   computed: {},
   data() {
@@ -18,4 +20,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.main {
+  padding: 60px 0;
+}
+</style>

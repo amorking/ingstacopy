@@ -1,5 +1,5 @@
 <template>
-  <v-footer class="core-tool-bar px-6" height="60" color="white" absolute>
+  <v-footer class="core-tool-bar px-6" height="60" color="white" fixed>
     <v-row justify="space-between" dense>
       <v-col
         class="d-flex justify-center"

@@ -1,7 +1,24 @@
 <template>
   <div class="story-slider">
     <div class="wrapper">
-      <div class="story-item" v-for="(storyItem, i) in story" :key="i">
+      <div class="story-item mr-4">
+        <v-badge
+          avatar
+          bordered
+          overlap
+          icon="mdi-plus"
+          offset-x="24"
+          offset-y="24"
+          bottom
+          class="d-flex"
+        >
+          <div class="story-img">
+            <img :src="myProfile.img" alt="" />
+          </div>
+        </v-badge>
+        <span>내 스토리</span>
+      </div>
+      <div class="story-item mr-4" v-for="(storyItem, i) in story" :key="i">
         <div class="story-img">
           <img :src="storyItem.img" />
         </div>
@@ -17,7 +34,7 @@ import { mapState } from 'vuex';
 export default {
   name: 'StorySlider',
   computed: {
-    ...mapState(['story']),
+    ...mapState(['story', 'myProfile']),
   },
   data() {
     return {};
@@ -32,26 +49,29 @@ export default {
 }
 
 .wrapper {
-  width: 1000px;
   white-space: nowrap;
-  padding: 24px;
+  padding: 16px 24px;
 }
 
 .story-item {
   display: inline-block;
-  margin-right: 10px;
   text-align: center;
   .story-img {
     overflow: hidden;
-    border: 1px solid red;
+    border: solid 2px orangered;
     border-radius: 100px;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 8px;
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
+}
+
+.story-item:first-child .story-img {
+  border: none;
 }
 </style>

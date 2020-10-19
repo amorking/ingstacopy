@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar class="core-app-bar" height="60" color="white" elevation="1">
+  <v-app-bar class="core-app-bar" height="60" color="white" elevation="0" fixed>
     <router-link to="">
       <v-btn icon>
         <v-icon class="mt-1" large>
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-toolbar__content {
-  width: 100%;
+.core-app-bar {
+  border-bottom: 1px solid #ddd !important;
 }
 </style>
