@@ -1,16 +1,11 @@
 <template>
   <div class="feed">
-    <div
-      class="feed-wrap mb-4"
-      v-for="(postItem, i) in post"
-      :key="i"
-      :v-model="postItem"
-    >
+    <div class="feed-wrap mb-4">
       <div class="feed-user-info d-flex align-center pa-4">
         <v-avatar class="profile mr-4">
-          <img :src="postItem.userProfile.img" alt="프로필 이미지" />
+          <img :src="post.userProfile.img" alt="프로필 이미지" />
         </v-avatar>
-        <span class="user-name">{{ postItem.userProfile.name }}</span>
+        <span class="user-name">{{ post.userProfile.name }}</span>
         <v-spacer></v-spacer>
         <v-btn icon>
           <v-icon color="#222">
@@ -21,7 +16,7 @@
       <!-- /.feed-user-info -->
       <div class="content">
         <v-img
-          :src="postItem.content.img"
+          :src="post.content.img"
           :aspect-ratio="1 / 1"
           alt="컨텐츠 이미지"
         />
@@ -50,19 +45,19 @@
         </v-toolbar>
         <!-- /.content-tool-bar -->
         <div class="liker px-4">
-          <span class="liker-count">좋아요 {{ postItem.like.length }}개</span>
+          <span class="liker-count">좋아요 {{ post.like.length }}개</span>
         </div>
         <div class="text-wrap pa-4">
           <div class="text">
             <p>
               <span class="user-name mr-1">
-                {{ postItem.userProfile.name }}
+                {{ post.userProfile.name }}
               </span>
-              {{ postItem.content.text }}
+              {{ post.content.text }}
               <a
                 class="link"
                 href="#"
-                v-for="(hashItem, i) in postItem.content.hash"
+                v-for="(hashItem, i) in post.content.hash"
                 :key="i"
               >
                 {{ `#${hashItem}` }}
@@ -71,7 +66,7 @@
           </div>
           <div class="comment-wrap">
             <ul>
-              <li v-for="(comment, i) in postItem.comments" :key="i">
+              <li v-for="(comment, i) in post.comments" :key="i">
                 <span class="user-name mr-1">{{ comment.name }}</span>
                 <span>{{ comment.text }}</span>
               </li>
@@ -81,6 +76,27 @@
         <!-- /.text-wrap -->
       </div>
       <!-- /.content -->
+      <div class="comment-wrap d-flex align-center px-4 pb-6">
+        <v-avatar class="mr-4">
+          <v-img :src="myProfile.img"></v-img>
+        </v-avatar>
+        <v-text-field
+          class="comment-box"
+          label="댓글을 입력하세요."
+          solo
+          rounded
+          hide-details="auto"
+        >
+          <template v-slot:append>
+            <v-btn icon class="comment-ico">
+              <v-icon>
+                mdi-send
+              </v-icon>
+            </v-btn>
+          </template>
+        </v-text-field>
+      </div>
+      <!-- /.comment -->
     </div>
     <!-- /.feed-wrap -->
   </div>
@@ -88,30 +104,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
   name: 'Feed',
-  computed: {
-    ...mapState(['post']),
-  },
-  data() {
-    return {};
-  },
-  methods: {},
-  beforeMount() {
-    this.$store.commit(
-      'setHash',
-      this.post.forEach((el) => {
-        //내용을 쭉--쓰고 맨 뒤에 hashTag를 #으로 구분해서 붙였다는 가정
-        let hashArr = el.content.text.split('#'); //post 배열의 각 오브젝트에서 content.text를 #으로 split
-        let parsedHash = hashArr.splice(1, hashArr.length); //#으로 split된 배열의 1번째 자리부터 hashArr.length만큼 지우고, splice는 지운 값을 리턴한다.
-        el.content.hash = parsedHash; //content에 hash라는 키를 추가하고 hash의 값을 parseHash로 초기화
-        el.content.text = hashArr[0]; //content에 text를 hashArr에서 hashTag를 제외한 0번째 원소, 즉 내용으로 초기화.
-        return el; //parsing한 내용을 추가한 el을 리턴
-      })
-    );
-  },
+  props: ['post', 'myProfile'],
 };
 </script>
 
@@ -134,6 +129,9 @@ li {
   }
   .liker {
     font-weight: bold;
+  }
+  .comment-ico {
+    margin-right: -10px;
   }
 }
 </style>

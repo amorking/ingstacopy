@@ -36,10 +36,6 @@ export default {
   computed: {
     ...mapState(['story', 'myProfile']),
   },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>
 

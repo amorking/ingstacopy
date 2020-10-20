@@ -51,7 +51,7 @@ export default new Vuex.Store({
           'https://img6.yna.co.kr/photo/yna/YH/2018/06/04/PYH2018060410990001300_P2.jpg',
       },
     ],
-    post: [
+    posts: [
       {
         userProfile: {
           name: 'iu',
@@ -95,12 +95,7 @@ export default new Vuex.Store({
       },
     ],
   },
-  mutations: {
-    setHash(state, payload) {
-      //post는 배열이니까 return 받은 오브젝트를 원소로 push
-      state.post.push = payload;
-    },
-  },
+  mutations: {},
   actions: {},
   modules: {},
 });
