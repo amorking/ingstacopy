@@ -94,6 +94,7 @@ export default new Vuex.Store({
         ],
       },
     ],
+    hash: [],
   },
   mutations: {},
   actions: {},

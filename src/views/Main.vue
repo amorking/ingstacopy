@@ -28,6 +28,7 @@ export default {
     return {};
   },
   methods: {},
+  beforeMount() {},
 };
 </script>
 
