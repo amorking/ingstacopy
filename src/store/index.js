@@ -87,6 +87,8 @@ export default new Vuex.Store({
         },
         like: ['shibaba', 'shibalove', 'myshibababa', 'fububu', 'hahaha'],
         comments: [
+          //댓글을 남기게 되면 이곳에 추가된다.
+          //API > store > comp > API > store > comp
           { name: '90mm', text: '시바 사랑해요' },
           { name: '시바사랑', text: '시바 너무 기대되' },
           { name: '시바주인', text: '좋아요 아주 시바' },
@@ -96,7 +98,14 @@ export default new Vuex.Store({
     ],
     hash: [],
   },
-  mutations: {},
+  mutations: {
+    pushComment(state, payload) {
+      state.posts[payload.index].comments.push({
+        name: payload.name,
+        text: payload.text,
+      });
+    },
+  },
   actions: {},
   modules: {},
 });

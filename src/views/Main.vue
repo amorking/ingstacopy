@@ -6,6 +6,7 @@
       :key="i"
       :post="post"
       :myProfile="myProfile"
+      :index="i"
     >
       <!-- 매개변수 이름에 post를 넣어준다. v-bind:post = "post" -->
     </Feed>

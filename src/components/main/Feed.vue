@@ -22,7 +22,12 @@
         />
         <FeedIcon :post="post"></FeedIcon>
         <FeedLike :post="post"></FeedLike>
-        <FeedText :post="post"></FeedText>
+        <FeedText :post="post" :text="post.content.text"></FeedText>
+        <FeedComment
+          :comments="post.comments"
+          :myProfile="myProfile"
+          :index="index"
+        ></FeedComment>
       </div>
       <!-- /.content -->
       <div class="comment-wrap d-flex align-center px-4 pb-6">
@@ -55,11 +60,12 @@
 <script>
 export default {
   name: 'Feed',
-  props: ['post', 'myProfile'],
+  props: ['post', 'myProfile', 'index'],
   components: {
     FeedIcon: () => import('@/components/main/FeedIcon.vue'),
     FeedLike: () => import('@/components/main/FeedLike.vue'),
     FeedText: () => import('@/components/main/FeedText.vue'),
+    FeedComment: () => import('@/components/main/FeedComment.vue'),
   },
   data() {
     return {};
